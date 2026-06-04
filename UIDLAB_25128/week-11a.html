@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <title>Username Validation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .form-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      width: 350px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #444;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+    input[type="text"]:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+    #userMsg {
+      display: block;
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .error {
+      color: #d9534f;
+    }
+    .success {
+      color: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Username Check</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username" onkeyup="checkUsername()" placeholder="Enter username">
+    <span id="userMsg"></span>
+  </div>
+
+  <script>
+    function checkUsername() {
+      let uname = document.getElementById("username").value;
+      let msg = document.getElementById("userMsg");
+      if (uname.length < 5) {
+        msg.innerHTML = "Username must be at least 5 characters";
+        msg.className = "error";
+      } else {
+        msg.innerHTML = "Valid username";
+        msg.className = "success";
+      }
+    }
+  </script>
+</body>
+</html>

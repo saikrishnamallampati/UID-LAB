@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #c05959;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 350px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #444;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border-color 0.3s;
+    }
+    input[type="text"]:focus, input[type="password"]:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+    span {
+      font-size: 12px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    input[type="submit"]:hover {
+      background: #0056b3;
+    }
+    .error {
+      color: red;
+    }
+    .success {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Registration Form</h2>
+    <form onsubmit="return validateForm(event)">
+      <label>Name:</label>
+      <input type="text" id="name">
+      
+      <label>Surname:</label>
+      <input type="text" id="surname" onkeyup="checkSurname()">
+      <span id="surnameMsg"></span>
+      
+      <label>Email:</label>
+      <input type="text" id="email">
+      <span id="emailMsg"></span>
+      
+      <label>Password:</label>
+      <input type="password" id="password" onkeyup="checkPasswordStrength()">
+      <span id="passMsg"></span>
+      
+      <label>Mobile:</label>
+      <input type="text" id="mobile" onblur="validateMobile()">
+      <span id="mobileMsg"></span>
+      <input type="submit" value="Register">
+    </form>
+  </div>
+  <script>
+    function checkUsername() {
+      let uname = document.getElementById("username").value;
+      let msg = document.getElementById("userMsg");
+      if (uname.length < 5) {
+        msg.innerHTML = "Username must be at least 5 characters";
+        msg.className = "error";
+      } else {
+        msg.innerHTML = "Valid username";
+        msg.className = "success";
+      }
+    }
+    function validateEmail(email) {
+      let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      return pattern.test(email);
+    }
+
+    function checkPasswordStrength() {
+      let pwd = document.getElementById("password").value;
+      let msg = document.getElementById("passMsg");
+      if (pwd.length < 6) {
+        msg.innerHTML = "Weak password";
+        msg.className = "error";
+      } else {
+        msg.innerHTML = "Strong password";
+        msg.className = "success";
+      }
+    }
+    function validateMobile() {
+      let mob = document.getElementById("mobile").value;
+      let msg = document.getElementById("mobileMsg");
+      if (/^\d{10}$/.test(mob)) {
+        msg.innerHTML = "Valid mobile number";
+        msg.className = "success";
+      } else {
+        msg.innerHTML = "Mobile number must be 10 digits";
+        msg.className = "error";
+      }
+    }
+    function validateForm(event) {
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      let mobile = document.getElementById("mobile").value;
+  if (name.trim() === "") {
+        alert("Name cannot be empty");
+        return false;
+      }
+      if (!validateEmail(email)) {
+        alert("Invalid email format");
+        return false;
+      }
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters");
+        return false;
+      }
+      if (!/^\d{10}$/.test(mobile)) {
+        alert("Mobile number must be exactly 10 digits");
+        return false;
+      }
+      alert("Registration Successful!");
+      return true;
+  }
+  </script>
+</body>
+</html>

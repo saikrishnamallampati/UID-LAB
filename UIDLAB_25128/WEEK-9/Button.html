@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+
+    <style>
+        body {
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            
+            background: linear-gradient(135deg, #2585d9, #ae1d0f);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 420px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 12px;
+            width: 80%;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            padding: 10px 15px;
+            margin: 6px;
+            border: none;
+            border-radius: 8px;
+            background: white;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #ffcc00;
+            transform: scale(1.05);
+        }
+        #outputBox {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            font-size: 18px;
+            min-height: 50px;
+        }
+        .btn {
+    padding: 10px 15px;
+    margin: 6px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #ffffff, #e0e0e0);
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+    .btn:hover {
+    background: linear-gradient(45deg, #ffcc00, #ff9900);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+    .btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Program Panel</h1>
+
+    <input type="number" id="numInput" placeholder="Enter a number">
+
+    <br>
+
+    <button class="btn" onclick="checkEven()">Even</button>
+    <button class="btn" onclick="checkOdd()">Odd</button>
+    <button class="btn" onclick="checkPrime()">Prime</button>
+    <button class="btn" onclick="findFactorial()">Factorial</button>
+    <button class="btn" onclick="checkArmstrong()">Armstrong</button>
+
+    <div id="outputBox">Output will appear here...</div>
+</div>
+
+<script>
+
+
+function getNumber() {
+    var value = document.getElementById("numInput").value;
+    var number = parseInt(value);
+    return number;
+}
+
+function show(msg) {
+    document.getElementById("outputBox").innerHTML = msg;
+}
+
+// Even
+function checkEven() {
+    var n = getNumber();
+
+    if (n % 2 == 0) {
+        show(n + " is Even");
+    } else {
+        show(n + " is Not Even");
+    }
+}
+
+// Odd
+function checkOdd() {
+    var n = getNumber();
+
+    if (n % 2 != 0) {
+        show(n + " is Odd");
+    } else {
+        show(n + " is Not Odd");
+    }
+}
+// Prime
+function checkPrime() {
+    var n = getNumber();
+    var isPrime = true;
+
+    if (n < 2) {
+        isPrime = false;
+    } else {
+        for (var i = 2; i < n; i++) {
+            if (n % i == 0) {
+                isPrime = false;
+                break;
+            }
+        }
+    }
+
+    if (isPrime) {
+        show(n + " is Prime");
+    } else {
+        show(n + " is NOT Prime");
+    }
+}
+
+// Factorial (fixed + simple)
+function findFactorial() {
+    var n = getNumber();
+    var fact = 1;
+
+    for (var i = 1; i <= n; i++) {
+        fact = fact * i;
+    }
+
+    show("Factorial is " + fact);
+}
+
+// Armstrong
+function checkArmstrong() {
+    var n = getNumber();
+    var temp = n;
+    var sum = 0;
+    var digits = n.toString().length;
+
+    while (temp > 0) {
+        var d = temp % 10;
+        sum = sum + Math.pow(d, digits);
+        temp = Math.floor(temp / 10);
+    }
+
+    if (sum == n) {
+        show(n + " is an Armstrong Number");
+    } else {
+        show(n + " is NOT an Armstrong Number");
+    }
+}
+
+
+
+</script>
+
+</body>
+</html>
